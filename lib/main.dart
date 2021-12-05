@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:payflow/modules/home/home_page.dart';
-import 'package:payflow/modules/login/login_page.dart';
-import 'package:payflow/modules/splash/splash_page.dart';
-import 'package:payflow/shared/themes/app_colors.dart';
+import 'package:payflow/shared/app/app_provider.dart';
+
+import 'shared/app/app_widget.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pay Flow',
-      theme: ThemeData(
-        primaryColor: AppColors.primary,
-      ),
-      home: HomePage(),
-    );
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const AppProvider(child: App()));
 }

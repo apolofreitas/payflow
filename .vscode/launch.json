@@ -7,7 +7,8 @@
     {
       "name": "payflow",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "args": ["--web-port", "5000"]
     },
     {
       "name": "payflow (profile mode)",

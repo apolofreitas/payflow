@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/login/login_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_images.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/widgets/social_login/social_login_button.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final controller = LoginController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Container(
+      body: SizedBox(
         width: size.width,
         height: size.height,
         child: Stack(
@@ -32,14 +35,40 @@ class _LoginPageState extends State<LoginPage> {
               top: 40,
               left: 0,
               right: 0,
-              child: Image.asset(
-                AppImages.person,
-                width: 208,
-                height: 373,
+              child: Stack(
+                children: [
+                  Stack(alignment: Alignment.bottomCenter, children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                          fit: BoxFit.scaleDown,
+                          image: AssetImage(AppImages.person),
+                        ),
+                      ),
+                      height: size.height * 0.475,
+                    ),
+                    Container(
+                      height: 90.0,
+                      decoration: BoxDecoration(
+                        color: AppColors.background,
+                        gradient: LinearGradient(
+                          begin: FractionalOffset.topCenter,
+                          end: FractionalOffset.bottomCenter,
+                          colors: [
+                            AppColors.background.withOpacity(0.0),
+                            AppColors.background.withOpacity(1.0),
+                          ],
+                          stops: const [0.0, 1.0],
+                        ),
+                      ),
+                    )
+                  ]),
+                ],
               ),
             ),
             Positioned(
-                height: 300,
+                height: size.height * 0.4,
                 bottom: 40,
                 left: 0,
                 right: 0,
@@ -56,11 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 40, right: 40),
+                      padding: const EdgeInsets.only(left: 40, right: 40),
                       child: SocialLoginButton(
-                        onTap: () {
-                          print("clicou");
-                        },
+                        onTap: controller.signInWithGoogle,
                       ),
                     ),
                   ],
