@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final String initialRoute;
   final Map<String, Widget> routes;
-  late final RxString _currentRoute;
+  late final RxString _currentRoute = initialRoute.obs;
 
   HomeController({
-    required String initialRoute,
+    required this.initialRoute,
     required this.routes,
-  }) {
-    _currentRoute = initialRoute.obs;
-  }
+  });
 
   get curretRoute => _currentRoute.value;
 

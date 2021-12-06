@@ -21,78 +21,80 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SizedBox(
-        width: size.width,
-        height: size.height,
-        child: Stack(
-          children: [
-            Container(
-              width: size.width,
-              height: size.height * 0.4,
-              color: AppColors.primary,
-            ),
-            Positioned(
-              top: 40,
-              left: 0,
-              right: 0,
-              child: Stack(
-                children: [
-                  Stack(alignment: Alignment.bottomCenter, children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.transparent,
-                        image: DecorationImage(
-                          fit: BoxFit.scaleDown,
-                          image: AssetImage(AppImages.person),
-                        ),
-                      ),
-                      height: size.height * 0.475,
-                    ),
-                    Container(
-                      height: 90.0,
-                      decoration: BoxDecoration(
-                        color: AppColors.background,
-                        gradient: LinearGradient(
-                          begin: FractionalOffset.topCenter,
-                          end: FractionalOffset.bottomCenter,
-                          colors: [
-                            AppColors.background.withOpacity(0.0),
-                            AppColors.background.withOpacity(1.0),
-                          ],
-                          stops: const [0.0, 1.0],
-                        ),
-                      ),
-                    )
-                  ]),
-                ],
-              ),
-            ),
-            Positioned(
+      body: SafeArea(
+        child: SizedBox(
+          width: size.width,
+          height: size.height,
+          child: Stack(
+            children: [
+              Container(
+                width: size.width,
                 height: size.height * 0.4,
-                bottom: 40,
+                color: AppColors.primary,
+              ),
+              Positioned(
+                top: 40,
                 left: 0,
                 right: 0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Stack(
                   children: [
-                    Image.asset(AppImages.logoMini),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 70, right: 70),
-                      child: Text(
-                        "Organize seus boletos em um lugar só",
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.titleHome,
+                    Stack(alignment: Alignment.bottomCenter, children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.transparent,
+                          image: DecorationImage(
+                            fit: BoxFit.scaleDown,
+                            image: AssetImage(AppImages.person),
+                          ),
+                        ),
+                        height: size.height * 0.475,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40, right: 40),
-                      child: SocialLoginButton(
-                        onTap: controller.signInWithGoogle,
-                      ),
-                    ),
+                      Container(
+                        height: 90.0,
+                        decoration: BoxDecoration(
+                          color: AppColors.background,
+                          gradient: LinearGradient(
+                            begin: FractionalOffset.topCenter,
+                            end: FractionalOffset.bottomCenter,
+                            colors: [
+                              AppColors.background.withOpacity(0.0),
+                              AppColors.background.withOpacity(1.0),
+                            ],
+                            stops: const [0.0, 1.0],
+                          ),
+                        ),
+                      )
+                    ]),
                   ],
-                ))
-          ],
+                ),
+              ),
+              Positioned(
+                  height: size.height * 0.4,
+                  bottom: 40,
+                  left: 0,
+                  right: 0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Image.asset(AppImages.logoMini),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 70, right: 70),
+                        child: Text(
+                          "Organize seus boletos em um lugar só",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.titleHome,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40, right: 40),
+                        child: SocialLoginButton(
+                          onTap: controller.signInWithGoogle,
+                        ),
+                      ),
+                    ],
+                  ))
+            ],
+          ),
         ),
       ),
     );

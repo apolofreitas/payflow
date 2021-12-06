@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'firebase_config.dart';
+import 'package:payflow/shared/app/app_widget.dart';
 
 class FirebaseWidget extends StatefulWidget {
   final Widget onLoading;
@@ -25,13 +25,14 @@ class _FirebaseWidgetState extends State<FirebaseWidget> {
 
   void initializeFlutterFire() async {
     try {
-      await Firebase.initializeApp(options: FirebaseConfig.platformOptions);
-      setState(() {
-        _isLoading = false;
-      });
+      await Firebase.initializeApp();
     } catch (e) {
       setState(() {
         _hasError = true;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
       });
     }
   }

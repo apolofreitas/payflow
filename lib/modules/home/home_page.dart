@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeController = HomeController(
+    final controller = HomeController(
       initialRoute: '/red',
       routes: {
         '/red': Container(
@@ -22,89 +22,102 @@ class HomePage extends StatelessWidget {
       },
     );
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(152),
-        child: Container(
-          height: 152,
-          color: AppColors.primary,
-          child: Center(
-            child: ListTile(
-              title: Text.rich(
-                TextSpan(
-                    text: "Olá, ",
-                    style: AppTextStyles.titleRegular,
-                    children: [
-                      TextSpan(
-                        text: "Apolo",
-                        style: AppTextStyles.titleBoldBackground,
-                      )
-                    ]),
-              ),
-              subtitle: Text(
-                "Mantenha suas contas em dia",
-                style: AppTextStyles.captionShape,
-              ),
-              trailing: Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(5),
+    return WillPopScope(
+      onWillPop: () async {
+        if (controller.curretRoute == controller.initialRoute) {
+          return true;
+        }
+        controller.navigateTo(controller.initialRoute);
+        return false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(152),
+            child: Container(
+              height: 152,
+              color: AppColors.primary,
+              child: Center(
+                child: ListTile(
+                  title: Text.rich(
+                    TextSpan(
+                        text: "Olá, ",
+                        style: AppTextStyles.titleRegular,
+                        children: [
+                          TextSpan(
+                            text: "Apolo",
+                            style: AppTextStyles.titleBoldBackground,
+                          )
+                        ]),
+                  ),
+                  subtitle: Text(
+                    "Mantenha suas contas em dia",
+                    style: AppTextStyles.captionShape,
+                  ),
+                  trailing: Container(
+                    height: 48,
+                    width: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-      body: Obx(() => homeController.currentPage),
-      bottomNavigationBar: SizedBox(
-        height: 90,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: () {
-                homeController.navigateTo('/red');
-              },
-              icon: Obx(
-                () => Icon(
-                  Icons.home,
-                  color: homeController.curretRoute == '/red'
-                      ? AppColors.primary
-                      : AppColors.body,
+          body: Obx(() => controller.currentPage),
+          bottomNavigationBar: SizedBox(
+            height: 90,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    controller.navigateTo('/red');
+                  },
+                  icon: Obx(
+                    () => Icon(
+                      Icons.home,
+                      color: controller.curretRoute == '/red'
+                          ? AppColors.primary
+                          : AppColors.body,
+                    ),
+                  ),
                 ),
-              ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed("/barcode_scanner");
+                  },
+                  child: Container(
+                    width: 56,
+                    height: 56,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const Icon(
+                      Icons.add_box_outlined,
+                      color: AppColors.background,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    controller.navigateTo('/blue');
+                  },
+                  icon: Obx(
+                    () => Icon(
+                      Icons.description_outlined,
+                      color: controller.curretRoute == '/blue'
+                          ? AppColors.primary
+                          : AppColors.body,
+                    ),
+                  ),
+                )
+              ],
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: const Icon(
-                  Icons.add_box_outlined,
-                  color: AppColors.background,
-                ),
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                homeController.navigateTo('/blue');
-              },
-              icon: Obx(
-                () => Icon(
-                  Icons.description_outlined,
-                  color: homeController.curretRoute == '/blue'
-                      ? AppColors.primary
-                      : AppColors.body,
-                ),
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
