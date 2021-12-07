@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'barcode_scanner_status.dart';
 
 class BarcodeScannerController extends GetxController {
@@ -61,9 +62,26 @@ class BarcodeScannerController extends GetxController {
   }
 
   void scanWithImagePicker() async {
-    final response = await ImagePicker().pickImage(source: ImageSource.gallery);
-    final inputImage = InputImage.fromFilePath(response!.path);
-    scanBarcodeImage(inputImage);
+    try {
+      final response =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (response == null) return;
+      final inputImage = InputImage.fromFilePath(response.path);
+      await scanBarcodeImage(inputImage);
+      if (status.barcode.isEmpty) {
+        Get.showSnackbar(
+          GetSnackBar(
+            messageText: Text(
+              "Não foi possível reconhecer nenhum código de barras",
+              style: AppTextStyles.buttonBackground,
+            ),
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    } catch (error) {
+      status = BarcodeScannerStatus.error(error.toString());
+    }
   }
 
   void startImageScan() {
@@ -124,7 +142,9 @@ class BarcodeScannerController extends GetxController {
           inputImageData: inputImageData,
         );
 
-        scanBarcodeImage(inputImageCamera);
+        if (!isBarcodeScannerProcessingImage) {
+          scanBarcodeImage(inputImageCamera);
+        }
       } catch (error) {
         status = BarcodeScannerStatus.error(error.toString());
       }
@@ -132,24 +152,18 @@ class BarcodeScannerController extends GetxController {
   }
 
   Future<void> scanBarcodeImage(InputImage inputImage) async {
-    if (isBarcodeScannerProcessingImage) return;
-
     isBarcodeScannerProcessingImage = true;
 
-    try {
-      final barcodes = await barcodeScanner.processImage(inputImage);
+    final barcodes = await barcodeScanner.processImage(inputImage);
 
-      String? barcode;
+    String? barcode;
 
-      for (Barcode item in barcodes) {
-        barcode = item.value.displayValue;
-      }
+    for (Barcode item in barcodes) {
+      barcode = item.value.displayValue;
+    }
 
-      if (barcode != null && status.barcode.isEmpty) {
-        status = BarcodeScannerStatus.scanned(barcode);
-      }
-    } catch (error) {
-      status = BarcodeScannerStatus.error(error.toString());
+    if (barcode != null && status.barcode.isEmpty) {
+      status = BarcodeScannerStatus.scanned(barcode);
     }
 
     isBarcodeScannerProcessingImage = false;

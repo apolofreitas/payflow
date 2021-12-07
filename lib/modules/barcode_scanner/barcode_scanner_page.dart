@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payflow/modules/barcode_scanner/barcode_scanner_controller.dart';
-import 'package:payflow/modules/barcode_scanner/barcode_scanner_status.dart';
 import 'package:payflow/shared/label_button_group/label_button_group.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
@@ -89,9 +88,7 @@ class _BarcodeScannePageState extends State<BarcodeScannePage> {
                       Get.offNamed("/insert_boleto");
                     },
                     secondaryLabel: "Adicionar da galeria",
-                    secondaryOnPressed: () {
-                      controller.status = BarcodeScannerStatus.error("Error");
-                    },
+                    secondaryOnPressed: controller.scanWithImagePicker,
                   ),
                 ),
                 Obx(() {
