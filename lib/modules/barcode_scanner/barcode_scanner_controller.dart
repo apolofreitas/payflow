@@ -33,6 +33,7 @@ class BarcodeScannerController extends GetxController {
       }
 
       if (status.hasBarcode) {
+        cameraController.dispose();
         if (onScanBarcode != null) onScanBarcode!(status.barcode);
       }
     });
@@ -52,6 +53,7 @@ class BarcodeScannerController extends GetxController {
       );
 
       await cameraController.initialize();
+      startListeningToCamera();
       startImageScan();
     } catch (error) {
       status = BarcodeScannerStatus.error(error.toString());
@@ -65,8 +67,6 @@ class BarcodeScannerController extends GetxController {
   }
 
   void startImageScan() {
-    if (cameraController.value.isStreamingImages) return;
-
     status = BarcodeScannerStatus.available();
 
     Future.delayed(const Duration(seconds: 30)).then((value) {
@@ -74,6 +74,10 @@ class BarcodeScannerController extends GetxController {
         status = BarcodeScannerStatus.error("Scanning barcode timeout");
       }
     });
+  }
+
+  void startListeningToCamera() {
+    if (cameraController.value.isStreamingImages) return;
 
     cameraController.startImageStream((cameraImage) async {
       if (status.stopScanner == true) return;

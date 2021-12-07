@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:payflow/shared/app/app_widget.dart';
 
 class FirebaseWidget extends StatefulWidget {
   final Widget onLoading;
