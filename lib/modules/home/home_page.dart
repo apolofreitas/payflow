@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payflow/modules/extract/extract_page.dart';
+import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
+import 'package:provider/provider.dart';
 
 import 'home_controller.dart';
 
@@ -13,19 +17,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = HomeController(
+    initialRoute: '/my_boletos',
+    routes: {
+      '/my_boletos': const MyBoletosPage(),
+      '/extract': const ExtractPage(),
+    },
+  );
+
   @override
   Widget build(BuildContext context) {
-    final controller = HomeController(
-      initialRoute: '/red',
-      routes: {
-        '/red': Container(
-          color: Colors.red,
-        ),
-        '/blue': Container(
-          color: Colors.blue,
-        )
-      },
-    );
+    final currentUser = context.read<User?>()!;
 
     return WillPopScope(
       onWillPop: () async {
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                         style: AppTextStyles.titleRegular,
                         children: [
                           TextSpan(
-                            text: "Apolo",
+                            text: currentUser.displayName,
                             style: AppTextStyles.titleBoldBackground,
                           )
                         ]),
@@ -59,19 +61,26 @@ class _HomePageState extends State<HomePage> {
                     "Mantenha suas contas em dia",
                     style: AppTextStyles.captionShape,
                   ),
-                  trailing: Container(
-                    height: 48,
-                    width: 48,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
+                  trailing: currentUser.photoURL != null
+                      ? Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                              image: NetworkImage(currentUser.photoURL!),
+                            ),
+                          ),
+                        )
+                      : null,
                 ),
               ),
             ),
           ),
-          body: Obx(() => controller.currentPage),
+          body: Obx(() {
+            return controller.currentPage;
+          }),
           bottomNavigationBar: SizedBox(
             height: 90,
             child: Row(
@@ -79,12 +88,12 @@ class _HomePageState extends State<HomePage> {
               children: [
                 IconButton(
                   onPressed: () {
-                    controller.navigateTo('/red');
+                    controller.navigateTo('/my_boletos');
                   },
                   icon: Obx(
                     () => Icon(
                       Icons.home,
-                      color: controller.curretRoute == '/red'
+                      color: controller.curretRoute == '/my_boletos'
                           ? AppColors.primary
                           : AppColors.body,
                     ),
@@ -109,12 +118,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 IconButton(
                   onPressed: () {
-                    controller.navigateTo('/blue');
+                    controller.navigateTo('/extract');
                   },
                   icon: Obx(
                     () => Icon(
                       Icons.description_outlined,
-                      color: controller.curretRoute == '/blue'
+                      color: controller.curretRoute == '/extract'
                           ? AppColors.primary
                           : AppColors.body,
                     ),

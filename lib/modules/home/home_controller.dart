@@ -21,7 +21,7 @@ class HomeController extends GetxController {
     return page;
   }
 
-  void navigateTo(String page) {
-    _currentRoute.value = page;
+  void navigateTo(String route) {
+    _currentRoute.value = route;
   }
 }

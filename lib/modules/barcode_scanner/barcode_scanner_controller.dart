@@ -15,6 +15,7 @@ class BarcodeScannerController extends GetxController {
   var isBarcodeScannerProcessingImage = false;
   final _status = BarcodeScannerStatus().obs;
   final void Function(String)? onScanBarcode;
+  var isDisposed = false;
 
   BarcodeScannerStatus get status => _status.value;
   set status(BarcodeScannerStatus status) => _status.value = status;
@@ -88,7 +89,7 @@ class BarcodeScannerController extends GetxController {
     status = BarcodeScannerStatus.available();
 
     Future.delayed(const Duration(seconds: 30)).then((value) {
-      if (status.hasBarcode == false) {
+      if (status.hasBarcode == false && !isDisposed) {
         status = BarcodeScannerStatus.error("Scanning barcode timeout");
       }
     });
@@ -171,6 +172,7 @@ class BarcodeScannerController extends GetxController {
 
   @override
   void dispose() {
+    isDisposed = true;
     barcodeScanner.close();
     if (status.canShowCamera) {
       cameraController.dispose();
