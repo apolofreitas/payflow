@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
@@ -61,8 +62,11 @@ class _HomePageState extends State<HomePage> {
                     "Mantenha suas contas em dia",
                     style: AppTextStyles.captionShape,
                   ),
-                  trailing: currentUser.photoURL != null
-                      ? Container(
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (currentUser.photoURL != null)
+                        Container(
                           height: 48,
                           width: 48,
                           decoration: BoxDecoration(
@@ -72,8 +76,51 @@ class _HomePageState extends State<HomePage> {
                               image: NetworkImage(currentUser.photoURL!),
                             ),
                           ),
-                        )
-                      : null,
+                        ),
+                      IconButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Sair da Conta'),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: const <Widget>[
+                                        Text('Tem certeza que deseja sair?'),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text(
+                                        'Cancelar',
+                                        style: AppTextStyles.buttonGray,
+                                      ),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text(
+                                        'Sair',
+                                        style: AppTextStyles.buttonPrimary,
+                                      ),
+                                      onPressed: () async {
+                                        await FirebaseAuth.instance.signOut();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                        icon: const Icon(
+                          FontAwesomeIcons.signOutAlt,
+                          color: AppColors.background,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
