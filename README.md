@@ -1,5 +1,5 @@
 <p align="center">
-      <img src="docs/payflow-logo.png" width="100" alt="Logo PayFlow"/>
+      <img src="https://raw.githubusercontent.com/apolofreitas/payflow/master/docs/images/payflow-logo.png" width="100" alt="Logo PayFlow"/>
 </p>
 
 <h1 align="center">Welcome to PayFlow 👋</h1>
@@ -12,9 +12,7 @@
 
 ## 📖 About
 
-This project was developed at Next Level Week, an intense week of studies, networking, friendship, group work, accompanied by a sensational project developed by Rocketseat from the 20th to the 27th of June.
-
-This application is a Billet Management, containing several features, which will soon be developed and explained.
+This project was developed at Next Level Week, an event promoted by Rocketseat. The goal was to develop a bill management application, containing several features, using Dart and Flutter.
 
 ## 🛠️ Functionalities
 
@@ -24,7 +22,7 @@ This application is a Billet Management, containing several features, which will
 
 ## 🎨 Layout
 
-<img alt="PayFlow Layout Banner" src="docs/payflow-layout-banner.png" />
+<img alt="PayFlow Layout Banner" src="https://raw.githubusercontent.com/apolofreitas/payflow/master/docs/images/payflow-layout-banner.png" />
 
 The Layout was developed by [Tiago Luchtenberg]("https://www.linkedin.com/in/tiagoluchtenberg"), and you can access it on [Figma]("https://www.figma.com/file/os9BgKaYgXguJC4QXYwIOr/PayFlow"). 📱
 
