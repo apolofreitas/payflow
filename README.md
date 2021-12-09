@@ -31,7 +31,7 @@ This project was developed at Next Level Week, an event promoted by Rocketseat. 
 
 The Layout was developed by [Tiago Luchtenberg](https://www.linkedin.com/in/tiagoluchtenberg), and you can access it on [Figma](https://www.figma.com/). 📱
 
-- [Mobile](https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow/)
+- [Layout Mobile](https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow/)
 
 ## 📓 Classes
 
