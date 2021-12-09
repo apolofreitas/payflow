@@ -1,16 +1,53 @@
-# payflow
+<p align="center">
+      <img src="docs/payflow-logo.png" width="100" alt="Logo PayFlow"/>
+</p>
 
-A new Flutter project.
+<h1 align="center">Welcome to PayFlow 👋</h1>
 
-## Getting Started
+<p align="center">
+  <a href="LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" />
+  </a>
+</p>
 
-This project is a starting point for a Flutter application.
+## 📖 About
 
-A few resources to get you started if this is your first Flutter project:
+This project was developed at Next Level Week, an intense week of studies, networking, friendship, group work, accompanied by a sensational project developed by Rocketseat from the 20th to the 27th of June.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This application is a Billet Management, containing several features, which will soon be developed and explained.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Functionalities
+
+- Social login with Google
+- Payment and Bills Management
+- Camera Usage and QRCode Reading with Google MLKit
+
+## 🎨 Layout
+
+<img alt="PayFlow Layout Banner" src="docs/payflow-layout-banner.png" />
+
+The Layout was developed by [Tiago Luchtenberg]("https://www.linkedin.com/in/tiagoluchtenberg"), and you can access it on [Figma]("https://www.figma.com/file/os9BgKaYgXguJC4QXYwIOr/PayFlow"). 📱
+
+## 📓 Classes
+
+- [x] Liftoff 💪
+- [x] Maximum Speed 🏃‍♂️
+- [x] In Orbit 👨‍🚀
+- [x] Landing 🔥
+- [x] Surface Exploration ⚡
+
+## 🤔 Getting started
+
+1. Clone this repository.
+2. Run `cd payflow`.
+3. Run `flutter pub get` to install dependencies.
+4. Run `flutter run` to start development server.
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/apolofreitas/payflow/issues).
+
+## 📝 License
+
+Copyright © 2021 [Apolo Freitas](https://www.linkedin.com/in/apolofreitas).<br />
+This project is [MIT](LICENSE) licensed.
