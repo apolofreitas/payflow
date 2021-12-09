@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" />
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge&color=FF941A&labelColor=000000" />
   </a>
 </p>
 
@@ -31,7 +31,7 @@ This project was developed at Next Level Week, an event promoted by Rocketseat. 
 
 The Layout was developed by [Tiago Luchtenberg](https://www.linkedin.com/in/tiagoluchtenberg), and you can access it on [Figma](https://www.figma.com/). 📱
 
-- [Layout Mobile](https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow/)
+- [Layout Mobile](https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow?node-id=58693%3A2216)
 
 ## 📓 Classes
 
