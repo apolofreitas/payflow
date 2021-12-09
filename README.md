@@ -29,7 +29,9 @@ This project was developed at Next Level Week, an event promoted by Rocketseat. 
 
 <img alt="PayFlow Layout Banner" src=".github/images/payflow-layout-banner.png" />
 
-The Layout was developed by [Tiago Luchtenberg](https://www.linkedin.com/in/tiagoluchtenberg), and you can access it on [Figma](https://www.figma.com/file/os9BgKaYgXguJC4QXYwIOr/PayFlow). 📱
+The Layout was developed by [Tiago Luchtenberg](https://www.linkedin.com/in/tiagoluchtenberg), and you can access it on [Figma](https://www.figma.com/). 📱
+
+- [Mobile](https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow/)
 
 ## 📓 Classes
 
